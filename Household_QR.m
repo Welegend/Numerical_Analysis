@@ -5,13 +5,13 @@
 function [Q, R] = Household_QR(A)
 
 [m, n] = size(A);
-H_fin = eye(n); % 为保证H_fin能和A相乘，维数是n，用于存放每次H的总乘积
+H_fin = eye(m); % 为保证H_fin能和A相乘，维数是m，用于存放每次H的总乘积
 for k = 1: min(m - 1, n)
     a = A(k: m, k); % A的第k列
     sigma = - sign(norm(a, 2)) * norm(a, 2); % norm为向量的范数
     w = a - sigma * eye(m - k + 1, 1);
     alpha = sigma * (sigma - a(1));
-    H = eye(n); % 用于降维、升阶
+    H = eye(m); % 用于降维、升阶
     H(k: end, k: end) = eye(m - k + 1) - w * w' / alpha; % H = I - 2 * u * u' 的变式
     H_fin = H * H_fin; % 降维、升阶后把H乘到一起
     A = H * A;
