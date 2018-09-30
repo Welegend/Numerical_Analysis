@@ -20,4 +20,10 @@ end
 Q = H_fin';
 R = A;
 
+% 考虑m>n的情况，简化Q R矩阵，这样得到的R始终和A的大小一样
+if m > n
+    Q = Q(:, 1: n);
+    R = R(1: n, :);
+end
+
 end
