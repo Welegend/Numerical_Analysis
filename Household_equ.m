@@ -14,17 +14,6 @@ R = R(1: n, :); % 在m>n的情况下，把R矩阵变成方阵
 y = y(1: n, :); % R变成方阵，y随之变化
 
 %% 以下是R为方阵且上三角矩阵时，求解方程组
-x_temp = zeros(n, size(y, 2)); % 预设x解向量
-x = zeros(n, size(y, 2));
-
-for k = 1: n
-    x_temp(end, :) = y(end, :) ./ R(end, end); % 先算第n个x
-    y = y - R(:, end) * x_temp(end, :); % 把计算出来的x解代入方程，简化方程
-    x(n - k + 1, :) = x_temp(n - k + 1, :);
-    x_temp(end, :) = [];
-    R(:, end) = [];
-    R(end, :) = [];
-    y(end, :) = [];
-end
+x = UTri_equ(R, y);
 
 end

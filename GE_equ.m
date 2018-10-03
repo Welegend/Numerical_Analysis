@@ -21,18 +21,7 @@ end
 A = Ab(:, 1: size(A, 2));
 b = Ab(:, end - size(b, 2) + 1: end);
 
-%% 以下是R为方阵且上三角矩阵时，求解方程组Rx=b
-x_temp = zeros(n, size(b, 2)); % 预设x解向量
-x = zeros(n, size(b, 2));
-
-for k = 1: n
-    x_temp(end, :) = b(end, :) ./ A(end, end); % 先算第n个x
-    b = b - A(:, end) * x_temp(end, :); % 把计算出来的x解代入方程，简化方程
-    x(n - k + 1, :) = x_temp(n - k + 1, :);
-    x_temp(end, :) = [];
-    A(:, end) = [];
-    A(end, :) = [];
-    b(end, :) = [];
-end
+%% 以下是A为方阵且上三角矩阵时，求解方程组Ax=b
+x = UTri_equ(A, b);
 
 end
