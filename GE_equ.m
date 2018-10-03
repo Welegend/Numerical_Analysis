@@ -21,7 +21,7 @@ end
 A = Ab(:, 1: size(A, 2));
 b = Ab(:, end - size(b, 2) + 1: end);
 
-%% 以下是R为方阵且上三角矩阵时，求解方程组
+%% 以下是R为方阵且上三角矩阵时，求解方程组Rx=b
 x_temp = zeros(n, size(b, 2)); % 预设x解向量
 x = zeros(n, size(b, 2));
 
