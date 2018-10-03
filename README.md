@@ -1,5 +1,6 @@
-# data_analysis
+﻿# data_analysis
 上了计算方法的课程，把其中的算法写成了matlab程序，初步认识一下数值分析算法
-Household_QR.m和Household_equ.m是用Household方法对矩阵A进行QR分解和解方程组
+LU_equ.m是用LU分解法解方程组，等价于高斯消去法
 GE_equ.m是用列主元高斯消去法解方程组
 LDL_equ.m是改进平方根法解方程组
+Household_QR.m和Household_equ.m是用Household方法对矩阵A进行QR分解和解方程组
