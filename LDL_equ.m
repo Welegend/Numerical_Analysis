@@ -8,6 +8,7 @@ function x = LDL_equ(A, b)
 
 [~, n] = size(A);
 %% 方阵的LDL分解(改进平方根分解)
+y = b; % 把b放入增广矩阵，分解后得到y
 A(2: n, 1) = A(2: n, 1) / A(1, 1); % 先求第一列的L矩阵，第一行不变不用求
 for k = 2: n % 第k行循环
     for j = 2: n % 第j列逐次计算
@@ -17,18 +18,14 @@ for k = 2: n % 第k行循环
             A(k, j) = A(k, j) - A(k, 1: k - 1) * A(1: k - 1, j); % 计算U矩阵，此时k<=j
         end
     end
+    y(k, :) = y(k, :) - A(k, 1: k - 1) * y(1: k - 1, :); % 用同样的方法对b分解
 end
 
 %% 以下转化为求LDL'x=b方程组，拆分求解
-% 解下三角矩阵方程组Ly=b
-L = eye(n);
-for j = 2: n
-    L(j, 1: j - 1) = A(j, 1: j - 1);
-end
-y = LTri_equ(L, b);
 % 解对角线矩阵方程组Dz=y
 z = y ./ diag(A);
 % 解上三角矩阵方程组L'x=z
-x = UTri_equ(L', z);
+A(eye(n) == 1) = 1; % 把A的对角线元素变为1，冒充L矩阵使用
+x = UTri_equ(A', z);
 
 end
