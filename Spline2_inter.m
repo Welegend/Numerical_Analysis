@@ -1,7 +1,7 @@
-% 函数功能：三次样条插值函数，第一种边界条件：已知f''(a),f''(b)
-% 输入：M0(即f''(a)),Mn（即f''(b)），n+1个插值点列向量x（从0到n）和y
+% 函数功能：三次样条插值函数，第二种边界条件：已知f'(a),f'(b)
+% 输入：der0(即f'(a)),dern（即f'(b)），n+1个插值点列向量x（从0到n）和y
 % 输出：分段插值函数S
-function S = Spline1_inter(x, y, M0, Mn)
+function S = Spline2_inter(x, y, der0, dern)
 %% 三次样条插值的M值的方程组的导出
 n = length(x);
 h = diff(x); % 这里定义的h1 = x2 - x1
@@ -11,10 +11,10 @@ f2 = (diff(y(2: end)) ./ h(2: end) - diff(y(1: end - 1)) ./ h(1: end - 1)) ./ (h
 d = 6 * f2;
 
 %% 求关于M的三对角矩阵方程组
-d(1) = d(1) - u(1) * M0;
-d(end) = d(end) - la(end) * Mn;
-M = Thomas_equ(u(2: end), 2 * ones(n - 2, 1), la(1: n - 3), d); % 追赶法
-M = [M0; M; Mn]; % M变成n维
+d1 = 6 / (x(2) - x(1)) * ((y(2) - y(1)) / (x(2) - x(1)) - der0);
+dn = 6 / (x(n) - x(n - 1)) * (dern - (y(n) - y(n - 1)) / (x(n) - x(n - 1)));
+d = [d1; d; dn];
+M = Thomas_equ([u; 1], 2 * ones(n, 1), [1; la], d); % 追赶法
 
 %% 代入S的方程组，S(x)为分段函数，段数不确定，用循环表示
 S = cell(n - 1, 2); % 第一列存放插值表达式，第二列存放区间端点
