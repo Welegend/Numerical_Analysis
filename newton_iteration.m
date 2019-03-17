@@ -40,7 +40,7 @@ for i = 1:size(x_value_list,2)
         end
         
         % print each iterate x_next value
-        fprintf('\nthe current x_value is %06f,\nthe current iterate_times is %d\n', ...
+        fprintf('\nthe current x_value is %f,\nthe current iterate_times is %d\n', ...
             x_next,iterate_times);
         
         % next iterate
@@ -51,5 +51,5 @@ for i = 1:size(x_value_list,2)
     res(i)=x_next;
 end
 fprintf('\nthe answer is\n');
-disp(transpose(res));
+fprintf('\n%f\n',res);
 end

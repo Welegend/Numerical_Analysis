@@ -1,6 +1,7 @@
-function res=Legendre(first_x_value,iterate_times)
+function res=Legendre(x_value_list,iterate_times)
 % \param first_x_value: start position
 % \param iterate_times: max N num of PN
+% 
 % \return res: the root value of Legendre
 % ------------------------------------------------------------%
 % P1(X)=1
@@ -9,11 +10,16 @@ function res=Legendre(first_x_value,iterate_times)
 % pN+2(X)= (2*n + 3) / (n + 2) * x * PN+1(x) - (n + 1) / (n + 2) * PN(x)
 % ------------------------------------------------------------%
 % example:
-% >> Legendre(0.93,7);
+% >> Legendre([0.93 -0.93 0.66 -0.66 0.23 -0.23],7);
 %
 % return 
-% the current x_value is 0.932470,
-% the current iterate_times is 2
+% the answer is
+% 0.932470
+% -0.932470
+% 0.661209
+% -0.661209
+% 0.238619
+% -0.238619
 % ------------------------------------------------------------%
 
 syms x;
@@ -29,5 +35,5 @@ for index=1:iterate_times-2
         );
 end
 disp(transpose(coefficient_list));
-res=newton_iteration(first_x_value,coefficient_list(iterate_times));
+res=newton_iteration(x_value_list,coefficient_list(iterate_times));
 end
