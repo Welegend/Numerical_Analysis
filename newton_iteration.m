@@ -1,5 +1,5 @@
 function res=newton_iteration(first_x_value,fx)
-% \param x: start position
+% \param first_x_value: start position
 % \param fx: syms expression
 % \return res: the root value of fx
 %
