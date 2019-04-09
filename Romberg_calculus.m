@@ -2,12 +2,11 @@ function res=Romberg_calculus(fx,a,b)
 % \param fx: syms expression
 % \param a:  left  bound
 % \param b:  right bound
-% \return res: the root value of fx
+% \return res: the fx calculas
 %
 % can change precision and max_iteration_times and min_diff_value at the following
-precision=1e-6;
-max_iteration_times=20;
-min_diff_value=1e-4;
+eps=1e-6;
+buf=zeros(15);   % size
 % ------------------------------------------------------------%
 % example:
 % fx=@(x)x^2*exp(x);
@@ -26,8 +25,6 @@ min_diff_value=1e-4;
 %     0.3146
 %     0.3146
 % ------------------------------------------------------------%
-eps=1e-6;
-buf=zeros(10,10);
 i=1;
 h=(b-a);
 buf(1,1)=(b-a)./2.*(fx(b)-fx(a));
@@ -38,18 +35,19 @@ if (abs((buf(i+1,1)-buf(i,1)))<eps)
 else
     while (abs((buf(i+1,1)-buf(i,1)))>=eps)
         i=i+1;
+        n=2.^i;
+        h=(b-a)/(2^i);
+        buf(1,i+1)=h/2*(fx(a)+fx(b));
+        for j=1:n-1
+            buf(1,i+1)=buf(1,i+1)+h/2*(2*fx(a+j*h)); % get T_1_i+1 value
+        end
+        
         for m=2:i+1
-            k=i-m;
-            n=2.^i;
-            h=(b-a)/2.^i;
-            buf(1,i+1)=h/2*(fx(a)+fx(b));
-            for j=1:n-1
-                buf(1,i+1)=buf(1,i+1)+h/2*(2*fx(a+j*h)); % get T_1_i+1 value
-            end
-            buf(m+1,k+1)=(4^m*buf(m,k+2)-buf(m,k+1))/(4^m-1);
+            k=i+2-m;
+            buf(m,k)=(4^m*buf(m-1,k+1)-buf(m-1,k))/(4^m-1);
         end
     end
 end
-disp(buf);
-res=buf(a+1,b+1);
+disp(buf(:,1));
+res=buf(i,1);
 end
