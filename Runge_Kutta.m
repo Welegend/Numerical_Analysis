@@ -16,7 +16,7 @@ y_list=zeros(1,15);   % size
 % a=0;
 % b=1;
 % alpha=1;
-% Runge_Kutta(fx,a,b,alpha,N);
+% Runge_Kutta(fx,a,b,alpha);
 %
 % return
 % the answer is
