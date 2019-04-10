@@ -10,12 +10,16 @@
 |列主元高斯消去法|                       | `GE_equ.m` |
 |改进平方根法|对称矩阵的三角分解| `LDL_equ.m` |
 |Household方法|QR分解| `Household_QR.m` <br> `Household_equ.m` |
+|龙贝格积分| | `Romberg_calculus.m` |
+
 
 ## 迭代解法
 |算法名称   |  文件名  |
 |:--------:|:--------:|
 |共轭梯度法 |`CG_equ.m`|
 |牛顿迭代法 |`newton_iteration.m`|
+|四级RK法   |`Runge_Kutta.m`|
+
 
 ## 插值
 |  算法名称   |             |     文件名      |
