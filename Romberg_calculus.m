@@ -4,7 +4,7 @@ function res=Romberg_calculus(fx,a,b)
 % \param b:  right bound
 % \return res: the fx calculas
 %
-% can change precision and max_iteration_times and min_diff_value at the following
+% can change precision at the following
 eps=1e-6;
 buf=zeros(15);   % size
 % ------------------------------------------------------------%
