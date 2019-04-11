@@ -38,6 +38,6 @@ while (1)
         break;
     end
 end
-disp(buf(:,1));
+fprintf('%.6f\n',buf(:,1));
 res=buf(i,1);
 end
