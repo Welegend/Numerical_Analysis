@@ -6,7 +6,7 @@ function res=Runge_Kutta(fx,a,b,alpha)
 % \return res: y_value list
 %
 % can change iterate times at the following
-N=10;
+N=5000;
 x_list=zeros(1,15);   % size
 y_list=zeros(1,15);   % size
 % ------------------------------------------------------------%
